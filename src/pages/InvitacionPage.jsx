@@ -20,6 +20,7 @@ export default function InvitacionPage() {
   const [config, setConfig] = useState(null)
   const [started, setStarted] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [musicPlayerRef, setMusicPlayerRef] = useState(null)
 
   const theme = getTheme(config)
 
@@ -58,6 +59,10 @@ export default function InvitacionPage() {
 
   const handleStart = () => {
     setStarted(true)
+    // Trigger music immediately on user interaction
+    if (musicPlayerRef && musicPlayerRef.unmuteAndPlay) {
+      setTimeout(() => musicPlayerRef.unmuteAndPlay(), 100)
+    }
   }
 
   return (
@@ -66,8 +71,12 @@ export default function InvitacionPage() {
         {!started && <StartScreen onStart={handleStart} theme={theme} key="start" />}
       </AnimatePresence>
 
-      {started && config.videoId && (
-        <MusicPlayer videoId={config.videoId} />
+      {config.videoId && (
+        <MusicPlayer 
+          videoId={config.videoId} 
+          onReady={setMusicPlayerRef}
+          shouldShow={started}
+        />
       )}
 
       <main className="relative">
