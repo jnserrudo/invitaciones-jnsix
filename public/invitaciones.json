@@ -24,23 +24,23 @@
   {
     "slug": "sofia-xv",
     "theme": "warm",
-    "nombreEvento": "SOFIA",
+    "nombreEvento": "Juana Evangelina del Castillo",
     "subtitulo": "MIS QUINCE",
     "fotoUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&h=1200&fit=crop",
-    "fechaHora": "2027-03-15T20:00:00",
-    "horarioTexto": "DE 20:00 A 04:00 HS",
-    "nombreSalon": "PALACIO SAN MIGUEL",
-    "direccion": "BELGRANO 1250, SAN MIGUEL",
-    "mapsUrl": "https://maps.google.com/?q=Belgrano+1250+San+Miguel",
+    "fechaHora": "2026-08-01T21:00",
+    "horarioTexto": "DE 21:00 A 05:00 HS",
+    "nombreSalon": "Nova Vila Salon de Eventos",
+    "direccion": "Av. Ex Combatientes de Malvinas, A4400 Salta",
+    "mapsUrl": "https://maps.app.goo.gl/YKZX89V1VjFZvqcVA?g_st=iw",
     "frase": "La vida está hecha de momentos especiales, pero los mejores son aquellos que compartimos con quienes amamos",
     "dressCode": "FORMAL",
     "mensajeRegalo": "Tu presencia es el mejor regalo, pero si deseas hacerme un obsequio...",
     "aliasLabel": "Alias:",
     "alias": "SOFIA.15",
-    "whatsapp": "5493875145165",
+    "whatsapp": "5493875104249",
     "mensajeConfirmacion": "¡Hola! Soy *${nombre}* y confirmo mi asistencia a tus 15 años",
     "videoId": "kIDWgqDBNXA",
     "createdAt": "2025-06-15T00:00:00.000Z",
-    "updatedAt": "2026-06-16T13:44:04.408Z"
+    "updatedAt": "2026-06-16T14:47:31.573Z"
   }
 ]
