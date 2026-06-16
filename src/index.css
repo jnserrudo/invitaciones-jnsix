@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-cinzel: 'Cinzel', serif;
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --color-inv-black: #0a0a0a;
+  --color-inv-white: #ffffff;
+  --color-inv-gray-100: #f5f5f5;
+  --color-inv-gray-200: #e5e5e5;
+  --color-inv-gray-300: #d4d4d4;
+  --color-inv-gray-400: #a3a3a3;
+  --color-inv-gray-500: #737373;
+  --color-inv-gray-600: #525252;
+  --color-inv-gray-700: #404040;
+  --color-inv-gray-800: #262626;
+  --color-inv-gray-900: #171717;
+  --color-warm-cream: #faf8f5;
+  --color-warm-champagne: #f3e9d8;
+  --color-warm-gold: #c9a96e;
+  --color-warm-gold-light: #d4b87a;
+  --color-warm-brown: #5c4a32;
+  --color-warm-brown-light: #8b7355;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-inter);
+  background-color: #000;
+  color: #fff;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100dvh;
+  width: 100%;
+}
+
+/* Animaciones */
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s infinite alternate ease-in-out;
+}
+
+/* Ocultar scrollbar pero mantener scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
