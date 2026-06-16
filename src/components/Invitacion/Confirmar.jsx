@@ -12,18 +12,58 @@ function WhatsAppIcon({ className }) {
 export default function Confirmar({ config, theme }) {
   const [nombre, setNombre] = useState('')
   const [acompanantes, setAcompanantes] = useState('')
+  const [errores, setErrores] = useState({ nombre: '', acompanantes: '' })
 
   const telefono = config.whatsapp || ''
+
+  const soloLetras = (texto) => /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/.test(texto)
+  const soloNumeros = (texto) => /^\d*$/.test(texto)
+
+  const handleNombreChange = (e) => {
+    const valor = e.target.value
+    if (soloLetras(valor)) {
+      setNombre(valor)
+      setErrores(prev => ({ ...prev, nombre: '' }))
+    } else {
+      setErrores(prev => ({ ...prev, nombre: 'Solo se permiten letras y espacios' }))
+    }
+  }
+
+  const handleAcompanantesChange = (e) => {
+    const valor = e.target.value
+    if (soloNumeros(valor)) {
+      setAcompanantes(valor)
+      setErrores(prev => ({ ...prev, acompanantes: '' }))
+    } else {
+      setErrores(prev => ({ ...prev, acompanantes: 'Solo se permiten números' }))
+    }
+  }
   const mensajeBase =
     config.mensajeConfirmacion ||
-    `Hola! Soy *${nombre.trim()}* y quiero confirmar mi asistencia a tu evento`
+    `Hola! Soy *\${nombre}* y quiero confirmar mi asistencia a tu evento`
 
   const handleConfirm = () => {
     if (!nombre.trim() || !telefono) return
-    let msg = mensajeBase.replace('*${nombre.trim()}*', nombre.trim())
-    if (acompanantes.trim()) {
-      msg += `. Voy con *${acompanantes.trim()}* acompañante(s)`
+    
+    const erroresActuales = {}
+    if (!soloLetras(nombre)) erroresActuales.nombre = 'Solo se permiten letras y espacios'
+    if (acompanantes && !soloNumeros(acompanantes)) erroresActuales.acompanantes = 'Solo se permiten números'
+    
+    if (Object.keys(erroresActuales).length > 0) {
+      setErrores(prev => ({ ...prev, ...erroresActuales }))
+      return
     }
+    
+    // Replace ${nombre} placeholder with actual name
+    let msg = mensajeBase.replace('${nombre}', nombre.trim())
+    
+    // Add acompañantes with proper pluralization
+    if (acompanantes.trim()) {
+      const cantidad = parseInt(acompanantes.trim(), 10)
+      const plural = cantidad === 1 ? 'acompañante' : 'acompañantes'
+      msg += `. Voy con *${cantidad}* ${plural}`
+    }
+    
     const url = `https://wa.me/${telefono.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`
     window.open(url, '_blank')
   }
@@ -63,20 +103,30 @@ export default function Confirmar({ config, theme }) {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <input
-            type="text"
-            placeholder="Tu nombre completo"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            className={`w-full ${theme.inputOnAccent} px-4 py-3 ${theme.fontUi} text-sm outline-none transition-colors rounded-sm`}
-          />
-          <input
-            type="text"
-            placeholder="Cantidad de acompañantes (opcional)"
-            value={acompanantes}
-            onChange={(e) => setAcompanantes(e.target.value)}
-            className={`w-full ${theme.inputOnAccent} px-4 py-3 ${theme.fontUi} text-sm outline-none transition-colors rounded-sm`}
-          />
+          <div>
+            <input
+              type="text"
+              placeholder="Tu nombre completo"
+              value={nombre}
+              onChange={handleNombreChange}
+              className={`w-full ${theme.inputOnAccent} px-4 py-3 ${theme.fontUi} text-sm outline-none transition-colors rounded-sm ${errores.nombre ? 'border-red-500 border' : ''}`}
+            />
+            {errores.nombre && (
+              <p className="text-red-400 text-xs mt-1 text-left">{errores.nombre}</p>
+            )}
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Cantidad de acompañantes (opcional)"
+              value={acompanantes}
+              onChange={handleAcompanantesChange}
+              className={`w-full ${theme.inputOnAccent} px-4 py-3 ${theme.fontUi} text-sm outline-none transition-colors rounded-sm ${errores.acompanantes ? 'border-red-500 border' : ''}`}
+            />
+            {errores.acompanantes && (
+              <p className="text-red-400 text-xs mt-1 text-left">{errores.acompanantes}</p>
+            )}
+          </div>
         </motion.div>
 
         <motion.button
