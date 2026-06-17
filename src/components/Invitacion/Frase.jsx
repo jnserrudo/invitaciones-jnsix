@@ -41,7 +41,7 @@ export default function Frase({ texto, theme }) {
             y="50"
             textAnchor="middle"
             dominantBaseline="middle"
-            className={`${theme.fontHeading} text-[7px] ${theme.textSecondary === 'text-inv-black' ? 'fill-inv-black' : 'fill-warm-brown'}`}
+            className={`${theme.fontHeading} text-[7px] ${theme.textSecondary === 'text-brown-warm' ? 'fill-brown-warm' : 'fill-inv-black'}`}
           >
             <textPath href="#circlePath" startOffset="0%">
               MIS 15  XV  MIS 15  XV  MIS 15  XV  
@@ -57,7 +57,7 @@ export default function Frase({ texto, theme }) {
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.svg
             viewBox="0 0 24 24"
-            className="w-6 h-6 fill-inv-black"
+            className={`w-6 h-6 ${theme.textSecondary === 'text-brown-warm' ? 'fill-brown-warm' : 'fill-inv-black'}`}
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
