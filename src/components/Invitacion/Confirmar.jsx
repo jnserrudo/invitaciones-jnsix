@@ -11,13 +11,14 @@ function WhatsAppIcon({ className }) {
 
 export default function Confirmar({ config, theme }) {
   const [nombre, setNombre] = useState('')
-  const [acompanantes, setAcompanantes] = useState('')
-  const [errores, setErrores] = useState({ nombre: '', acompanantes: '' })
+  // const [acompanantes, setAcompanantes] = useState('')
+  const [errores, setErrores] = useState({ nombre: '' })
+  // const [errores, setErrores] = useState({ nombre: '', acompanantes: '' })
 
   const telefono = config.whatsapp || ''
 
   const soloLetras = (texto) => /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/.test(texto)
-  const soloNumeros = (texto) => /^\d*$/.test(texto)
+  // const soloNumeros = (texto) => /^\d*$/.test(texto)
 
   const handleNombreChange = (e) => {
     const valor = e.target.value
@@ -29,15 +30,15 @@ export default function Confirmar({ config, theme }) {
     }
   }
 
-  const handleAcompanantesChange = (e) => {
-    const valor = e.target.value
-    if (soloNumeros(valor)) {
-      setAcompanantes(valor)
-      setErrores(prev => ({ ...prev, acompanantes: '' }))
-    } else {
-      setErrores(prev => ({ ...prev, acompanantes: 'Solo se permiten números' }))
-    }
-  }
+  // const handleAcompanantesChange = (e) => {
+  //   const valor = e.target.value
+  //   if (soloNumeros(valor)) {
+  //     setAcompanantes(valor)
+  //     setErrores(prev => ({ ...prev, acompanantes: '' }))
+  //   } else {
+  //     setErrores(prev => ({ ...prev, acompanantes: 'Solo se permiten números' }))
+  //   }
+  // }
   const mensajeBase =
     config.mensajeConfirmacion ||
     `Hola! Soy *\${nombre}* y quiero confirmar mi asistencia a tu evento`
@@ -47,7 +48,7 @@ export default function Confirmar({ config, theme }) {
     
     const erroresActuales = {}
     if (!soloLetras(nombre)) erroresActuales.nombre = 'Solo se permiten letras y espacios'
-    if (acompanantes && !soloNumeros(acompanantes)) erroresActuales.acompanantes = 'Solo se permiten números'
+    // if (acompanantes && !soloNumeros(acompanantes)) erroresActuales.acompanantes = 'Solo se permiten números'
     
     if (Object.keys(erroresActuales).length > 0) {
       setErrores(prev => ({ ...prev, ...erroresActuales }))
@@ -58,11 +59,11 @@ export default function Confirmar({ config, theme }) {
     let msg = mensajeBase.replace('${nombre}', nombre.trim())
     
     // Add acompañantes with proper pluralization
-    if (acompanantes.trim()) {
-      const cantidad = parseInt(acompanantes.trim(), 10)
-      const plural = cantidad === 1 ? 'acompañante' : 'acompañantes'
-      msg += `. Voy con *${cantidad}* ${plural}`
-    }
+    // if (acompanantes.trim()) {
+    //   const cantidad = parseInt(acompanantes.trim(), 10)
+    //   const plural = cantidad === 1 ? 'acompañante' : 'acompañantes'
+    //   msg += `. Voy con *${cantidad}* ${plural}`
+    // }
     
     const url = `https://wa.me/${telefono.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`
     window.open(url, '_blank')
@@ -115,7 +116,7 @@ export default function Confirmar({ config, theme }) {
               <p className="text-red-400 text-xs mt-1 text-left">{errores.nombre}</p>
             )}
           </div>
-          <div>
+          {/* <div>
             <input
               type="text"
               placeholder="Cantidad de acompañantes (opcional)"
@@ -126,7 +127,7 @@ export default function Confirmar({ config, theme }) {
             {errores.acompanantes && (
               <p className="text-red-400 text-xs mt-1 text-left">{errores.acompanantes}</p>
             )}
-          </div>
+          </div> */}
         </motion.div>
 
         <motion.button

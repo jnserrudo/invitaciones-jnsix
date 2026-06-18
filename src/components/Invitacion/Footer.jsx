@@ -4,7 +4,7 @@ import { Heart } from 'lucide-react'
 export default function Footer({ theme }) {
   return (
     <motion.section
-      className={`w-full ${theme.bgSecondary} ${theme.textSecondary} py-14`}
+      className={`w-full ${theme.bgPrimary} ${theme.textPrimary} py-14`}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-50px' }}
