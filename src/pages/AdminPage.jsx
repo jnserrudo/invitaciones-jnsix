@@ -55,14 +55,23 @@ export default function AdminPage() {
 
   useEffect(() => {
     async function init() {
-      const local = getLocalInvitaciones()
-      if (local.length === 0) {
-        const staticData = await loadStaticInvitaciones()
-        if (staticData.length > 0) {
-          localStorage.setItem('invitaciones_admin_v1', JSON.stringify(staticData))
-        }
+      // Cargar siempre del JSON estático primero (para ver cambios en producción)
+      const staticData = await loadStaticInvitaciones()
+      if (staticData.length > 0) {
+        // Merge: JSON estático como base, localStorage como override
+        const local = getLocalInvitaciones()
+        const merged = staticData.map(staticInv => {
+          const localInv = local.find(l => l.slug === staticInv.slug)
+          return localInv ? { ...staticInv, ...localInv } : staticInv
+        })
+        // Agregar invitaciones locales que no estén en el JSON
+        const extraLocal = local.filter(l => !staticData.find(s => s.slug === l.slug))
+        const final = [...merged, ...extraLocal]
+        localStorage.setItem('invitaciones_admin_v1', JSON.stringify(final))
+        setInvitaciones(final)
+      } else {
+        refresh()
       }
-      refresh()
     }
     init()
   }, [refresh])
