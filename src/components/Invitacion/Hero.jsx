@@ -2,17 +2,25 @@ import { motion } from 'framer-motion'
 
 export default function Hero({ config, theme }) {
   return (
-    <section className="relative w-full h-[55vh] min-h-[400px] sm:h-[65vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
-      <motion.img
+    <section className="relative w-full aspect-[3/4] md:aspect-auto md:h-[85vh] overflow-hidden bg-black">
+      {/* Fondo borroso solo en desktop, donde la imagen no llena todo el contenedor */}
+      <img
+        src={config.fotoUrl}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110 hidden md:block"
+      />
+
+      {/* Imagen principal: object-cover en mobile (3:4) sin franjas, object-contain en desktop */}
+      <img
         src={config.fotoUrl}
         alt={config.nombreEvento}
-        className="absolute inset-0 w-full h-full object-cover object-[50%_25%]"
-        animate={{ scale: [1, 1.04, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute inset-0 w-full h-full object-cover md:object-contain"
       />
-      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent`} />
 
-      <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 px-6 text-center z-10">
+      {/* Degradado inferior para que el nombre se lea sobre la imagen */}
+      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent`} />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 px-6 text-center z-10">
         <motion.div
           className="max-w-lg mx-auto w-full"
           initial={{ opacity: 0, y: 30 }}
@@ -24,13 +32,13 @@ export default function Hero({ config, theme }) {
               {config.subtitulo}
             </p>
           )}
-          <h1 className={`${theme.fontHeading} text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest uppercase leading-none ${theme.textOnAccent} drop-shadow-2xl`}>
+          <h1 className={`${theme.fontHeading} text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide uppercase leading-tight ${theme.textOnAccent} drop-shadow-2xl`}>
             {config.nombreEvento}
           </h1>
         </motion.div>
         
         <motion.div
-          className={`mt-6 w-16 h-[1px] ${theme.border.replace('border', 'bg')}`}
+          className={`mt-3 w-10 h-[1px] ${theme.border.replace('border', 'bg')}`}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.2, delay: 0.8 }}
