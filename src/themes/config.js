@@ -55,25 +55,25 @@ export const themes = {
     bgSecondary: 'bg-red-wine',
     // StartScreen, Confirmar usan bgAccent (rojo vino)
     bgAccent: 'bg-red-wine',
-    // Texto sobre champán (oscuro para contraste)
-    textPrimary: 'text-red-wine-dark',
-    // Texto sobre rojo vino (claro para contraste)
-    textSecondary: 'text-champagne-cream',
-    // Texto muted sobre champán
-    textMuted: 'text-red-wine/60',
-    // Texto muted sobre rojo vino claro (blanco para mejor contraste)
-    textMutedDark: 'text-white',
+    // Texto sobre champán claro (casi negro para mejor contraste)
+    textPrimary: 'text-gray-900',
+    // Texto sobre rojo vino claro (negro para mejor contraste)
+    textSecondary: 'text-black',
+    // Texto muted sobre champán claro (casi negro para mejor contraste)
+    textMuted: 'text-gray-800',
+    // Texto muted sobre rojo vino claro (casi negro para mejor contraste)
+    textMutedDark: 'text-gray-800',
     border: 'border-gold-champagne/40',
     divider: 'divide-gold-champagne/30',
-    iconLight: 'text-gold-champagne',
-    iconDark: 'text-red-wine-dark',
-    btnPrimary: 'bg-gold-champagne border-gold-champagne text-red-wine-dark hover:bg-red-wine hover:text-champagne-cream',
+    iconLight: 'text-gray-900',
+    iconDark: 'text-gray-900',
+    btnPrimary: 'bg-gold-champagne border-gold-champagne text-gray-900 hover:bg-red-wine hover:text-gray-900',
     btnSecondary: 'bg-red-wine/10 border-gold-champagne/50 text-red-wine-dark hover:bg-gold-champagne hover:text-red-wine-dark',
-    input: 'bg-white border-gold-champagne/40 text-red-wine-dark placeholder-red-wine/50',
-    heart: 'fill-red-wine',
-    textOnAccent: 'text-champagne-cream',
-    btnOnAccent: 'bg-gold-champagne border-gold-champagne text-red-wine-dark hover:bg-champagne-cream hover:text-red-wine-dark',
-    inputOnAccent: 'bg-red-wine-dark border-champagne-cream/30 text-champagne-cream placeholder-champagne-cream/60',
+    input: 'bg-white border-gold-champagne/40 text-gray-900 placeholder-gray-400/50',
+    heart: 'fill-gray-900',
+    textOnAccent: 'text-gray-900',
+    btnOnAccent: 'bg-gold-champagne border-gold-champagne text-gray-900 hover:bg-champagne-cream hover:text-gray-900',
+    inputOnAccent: 'bg-red-wine-dark border-champagne-cream/30 text-gray-900 placeholder-white/80',
   },
 }
 
