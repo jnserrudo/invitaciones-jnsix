@@ -61,8 +61,8 @@ export const themes = {
     textSecondary: 'text-champagne-cream',
     // Texto muted sobre champán
     textMuted: 'text-red-wine/60',
-    // Texto muted sobre rojo (dorado)
-    textMutedDark: 'text-gold-champagne',
+    // Texto muted sobre rojo vino claro (blanco para mejor contraste)
+    textMutedDark: 'text-white',
     border: 'border-gold-champagne/40',
     divider: 'divide-gold-champagne/30',
     iconLight: 'text-gold-champagne',
