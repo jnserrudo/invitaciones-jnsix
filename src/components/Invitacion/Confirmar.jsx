@@ -17,6 +17,11 @@ export default function Confirmar({ config, theme }) {
 
   const telefono = config.whatsapp || ''
 
+  // Verificar si pasó la fecha límite de confirmación
+  const fechaLimitePasada = config.fechaLimiteConfirmacion
+    ? new Date() > new Date(config.fechaLimiteConfirmacion + 'T23:59:59')
+    : false
+
   const soloLetras = (texto) => /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/.test(texto)
   // const soloNumeros = (texto) => /^\d*$/.test(texto)
 
@@ -88,7 +93,7 @@ export default function Confirmar({ config, theme }) {
         </motion.div>
         
         <motion.p
-          className={`${theme.fontBody} text-base leading-relaxed tracking-wide max-w-xs mx-auto mb-8 ${theme.textOnAccent}`}
+          className={`${theme.fontBody} text-base leading-relaxed tracking-wide max-w-xs mx-auto mb-4 ${theme.textOnAccent}`}
           initial={{ y: 15, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -96,6 +101,21 @@ export default function Confirmar({ config, theme }) {
         >
           Es importante contar con tu presencia
         </motion.p>
+
+        {config.fechaLimiteConfirmacion && (
+          <motion.p
+            className={`${theme.fontUi} text-xs tracking-[0.2em] uppercase max-w-xs mx-auto mb-8 ${theme.textOnAccent} ${fechaLimitePasada ? 'text-red-400' : 'opacity-80'}`}
+            initial={{ y: 15, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.35 }}
+          >
+            {fechaLimitePasada
+              ? 'El plazo de confirmación ha finalizado'
+              : `Confirmar hasta el ${new Date(config.fechaLimiteConfirmacion + 'T00:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}`
+            }
+          </motion.p>
+        )}
 
         <motion.div
           className="max-w-xs mx-auto space-y-3 mb-8"
@@ -132,7 +152,7 @@ export default function Confirmar({ config, theme }) {
 
         <motion.button
           onClick={handleConfirm}
-          disabled={!nombre.trim() || !telefono}
+          disabled={!nombre.trim() || !telefono || fechaLimitePasada}
           className={`inline-flex items-center gap-3 ${theme.btnOnAccent} px-10 py-4 ${theme.fontUi} text-sm tracking-[0.2em] uppercase transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg`}
           initial={{ y: 15, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
